@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Chrome launch with JSON",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "chrome",
+            "flutterMode": "debug",
+            "toolArgs": ["--dart-define-from-file", "${workspaceFolder}/assets/settings.json"]
+        },
+        {
+            "name": "macOS launch with JSON",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "macOS",
+            "flutterMode": "debug",
+            "toolArgs": ["--dart-define-from-file", "${workspaceFolder}/assets/settings.json"]
+        },
+        {
+            "name": "Simulator launch with JSON",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "6B602A45-4D6A-4239-8D38-3CABE170B28D",
+            "flutterMode": "debug",
+            "toolArgs": ["--dart-define-from-file", "${workspaceFolder}/assets/settings.json"]
+        },
+        {
+            "name": "iPhone launch with JSON",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "00008110-0011691101F1401E",
+            "flutterMode": "debug",
+            "toolArgs": ["--dart-define-from-file", "${workspaceFolder}/assets/settings.json"]
+        }
+    ]
+}

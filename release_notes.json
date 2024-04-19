@@ -1,0 +1,11 @@
+[
+    {
+        "language": "en-GB",
+        "text": "Sample to show white label apps in Stockholm",
+        "description": "Sample white label app",
+        "keywords": "Codemagic, white label, CI/CD",
+        "promotional_text": "Codemagic white label apps",
+        "marketing_url": "https://codemagic.io",
+        "support_url": "https://codemagic.io"
+    }
+]
