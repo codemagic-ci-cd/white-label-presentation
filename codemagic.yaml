@@ -73,7 +73,7 @@ workflows:
       
       - name: Flutter build ipa and automatic versioning
         script: |
-          BUILD_NUMBER=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 1))
+          BUILD_NUMBER=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 4))
           flutter build ipa --release \
           --build-name=1.0.$BUILD_NUMBER \
           --build-number=$BUILD_NUMBER \
@@ -89,7 +89,9 @@ workflows:
             api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
             key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
             issuer_id: $APP_STORE_CONNECT_ISSUER_ID         # Alphanumeric value that identifies who created the API key, can also reference environment variable such as $APP_STORE_CONNECT_ISSUER_ID
-            submit_to_testflight: true                  
+        # email:
+        #   recipients:
+        #       - user1@example.com
     
   ios-client-develop:
     name: iOS client develop
