@@ -64,7 +64,7 @@ workflows:
       - name: iOS code signing
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_ADHOC --create
           keychain add-certificates
           xcode-project use-profiles
       
