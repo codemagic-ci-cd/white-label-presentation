@@ -84,6 +84,13 @@ workflows:
       - /tmp/xcodebuild_logs/*.log    
       - test-results/flutter.json
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+   publishing:
+        app_store_connect:   # https://docs.codemagic.io/publishing-yaml/distribution              
+            api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
+            key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
+            issuer_id: $APP_STORE_CONNECT_ISSUER_ID         # Alphanumeric value that identifies who created the API key, can also reference environment variable such as $APP_STORE_CONNECT_ISSUER_ID
+            submit_to_testflight: true                  
+    
   ios-client-develop:
     name: iOS client develop
     instance_type: mac_mini_m2
