@@ -84,7 +84,7 @@ workflows:
       - /tmp/xcodebuild_logs/*.log    
       - test-results/flutter.json
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
-   publishing:
+  publishing:
         app_store_connect:   # https://docs.codemagic.io/publishing-yaml/distribution              
             api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
             key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
