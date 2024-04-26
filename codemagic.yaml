@@ -84,6 +84,72 @@ workflows:
       - /tmp/xcodebuild_logs/*.log    
       - test-results/flutter.json
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+  ios-client-develop:
+    name: iOS client develop
+    instance_type: mac_mini_m2
+    labels:
+      - ${CLIENT_ID} # Helpful when you open your Codemagic's builds page  
+    environment:
+      groups:
+        # customer specific groups are set using the API request
+        - aws_credentials # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
+      vars:
+        <<: *env_vars
+        XCODE_SCHEME: "Runner"  
+    scripts:
+      - *get_assets #Getting client assets from S3 bucket
+
+      - name: Change iOS app name
+        script: /usr/libexec/PlistBuddy -c "Set :CFBundleName $APP_NAME" -c "Set :CFBundleDisplayName $APP_NAME" ios/${XCODE_SCHEME}/Info.plist
+
+      - name: Set bundle id
+        script: sed -i '' -e 's/PRODUCT_BUNDLE_IDENTIFIER \= [^\;]*\;/PRODUCT_BUNDLE_IDENTIFIER = '${BUNDLE_ID}';/' ios/${XCODE_SCHEME}.xcodeproj/project.pbxproj
+
+      - name: Change iOS icons
+        script: cp -r ./$ASSETS_FOLDER/$IOS_ASSETS_FOLDER ios/${XCODE_SCHEME}/Assets.xcassets/
+
+      - name: Change fonts
+        script: |
+          if [ "$FONT_FAMILY" != "Montserrat" ]; then
+            cp -r "./$ASSETS_FOLDER/$FONT_FAMILY" "./fonts/$FONT_FAMILY"
+            sed -i '' "s/Montserrat/$FONT_FAMILY/g" pubspec.yaml
+          fi    
+      
+      # - name: Set client .env file
+      #   script: echo $DOTENV | base64 --decode > assets/client.env
+      
+      - name: Set main image
+        script: cp -r ./$ASSETS_FOLDER/header.png assets/header.png
+
+      - name: Add settings to assets
+        script: cp -r ./$ASSETS_FOLDER/settings.json assets/settings.json
+      
+      - name: Install pods
+        script: find . -name "Podfile" -execdir pod install \;      
+      
+      - name: iOS code signing
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          keychain add-certificates
+          xcode-project use-profiles
+      
+      - name: Install dependencies
+        script: flutter packages pub get      
+      
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          BUILD_NUMBER=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 1))
+          flutter build ipa --release \
+          --build-name=1.0.$BUILD_NUMBER \
+          --build-number=$BUILD_NUMBER \
+          --dart-define-from-file=$CM_BUILD_DIR/assets/settings.json \
+          --export-options-plist=/Users/builder/export_options.plist
+    artifacts: 
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log    
+      - test-results/flutter.json
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:      
       app_store_connect:
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY
