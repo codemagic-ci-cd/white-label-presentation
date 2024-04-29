@@ -1,15 +1,15 @@
 {
-    "main_header": "Hotel Riviera",
+    "main_header": "Hotel Blanco",
     "show_app_bar": false,
-    "status_bar_header": "Hotel Riviera",
-    "sub_header": "Hotel Riviera",
+    "status_bar_header": "Hotel Blanco",
+    "sub_header": "Hotel Blanco",
     "primary_color": "0xFFFF99FF",
     "background_color": "0xFFe36b00",
     "font_family": "OpenSans",
     "button_background_color": "0xFFFFFFFF",
     "button_foreground_color": "0xFF000000",
-    "hotel_address": "Antibes, France",
+    "hotel_address": "Gemmstock, Switzerland",
     "breakfast_weekdays": "06:30 to 11:00",
     "breakfast_weekends": "07:30 to 11:00",
-    "breakfast_location": "Terrace"
+    "breakfast_location": "Floor 3"
 }
