@@ -33,6 +33,9 @@ workflows:
     scripts:
       - *get_assets #Getting client assets from S3 bucket
 
+      - name: Set Firebase Plist
+        script: echo $FIREBASE_PLIST | base64 --decode > ios/Runner/GoogleService-Info.plist
+
       - name: Change iOS app name
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleName $APP_NAME" -c "Set :CFBundleDisplayName $APP_NAME" ios/${XCODE_SCHEME}/Info.plist
 
@@ -73,7 +76,7 @@ workflows:
       
       - name: Flutter build ipa and automatic versioning
         script: |
-          BUILD_NUMBER=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 2))
+          BUILD_NUMBER=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 1))
           flutter build ipa --release \
           --build-name=1.0.$BUILD_NUMBER \
           --build-number=$BUILD_NUMBER \
