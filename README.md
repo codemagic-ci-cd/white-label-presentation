@@ -2,6 +2,8 @@
 
 This sample shows how to white-label your core version of a Flutter app without the need to create multiple workflows.
 
+Slides for the presentation are here: https://docs.google.com/presentation/d/1VIoQpX7kI8doJVOXibkxMWDqPWdNpV9nzieQ3NHIADA/edit?usp=sharing
+
 ## Overview of white labeling with Codemagic
 
 When you white-label your app with Codemagic you can use a single workflow to build different versions of your app. Each build is started with the Codemagic REST API which allows you to provide the unique variables required for each version.
