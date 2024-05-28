@@ -52,7 +52,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 flutter_native_splash:
-  color: "#FF0000"
+  color: "#FFFFFF"
   #background_image: "assets/background.png"
 
 # The following section is specific to Flutter packages.
