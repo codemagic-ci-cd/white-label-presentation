@@ -41,7 +41,7 @@ workflows:
 
       - name: Change iOS splash color
         script: |
-          sed -i '' "s/color: \"#FFFFFF\"/color: "${SPLASH_COLOR}"/g" pubspec.yaml
+          sed -i '' "s/color: \"#FFFFFF\"/color: \"${SPLASH_COLOR}\"/g" pubspec.yaml SPLASH_COLOR
 
       - name: Set bundle id
         script: sed -i '' -e 's/PRODUCT_BUNDLE_IDENTIFIER \= [^\;]*\;/PRODUCT_BUNDLE_IDENTIFIER = '${BUNDLE_ID}';/' ios/${XCODE_SCHEME}.xcodeproj/project.pbxproj
