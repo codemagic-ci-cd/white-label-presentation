@@ -39,8 +39,8 @@ workflows:
       - name: Change iOS app name
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleName $APP_NAME" -c "Set :CFBundleDisplayName $APP_NAME" ios/${XCODE_SCHEME}/Info.plist
 
-      - name: Change iOS splash color
-        script: /usr/libexec/PlistBuddy -c "Set :UILaunchScreen:BackgroundColor $SPLASH_COLOR" ios/${XCODE_SCHEME}/Info.plist
+      # - name: Change iOS splash color
+      #   script: /usr/libexec/PlistBuddy -c "Set :UILaunchScreen:BackgroundColor $SPLASH_COLOR" ios/${XCODE_SCHEME}/Info.plist
 
       - name: Set bundle id
         script: sed -i '' -e 's/PRODUCT_BUNDLE_IDENTIFIER \= [^\;]*\;/PRODUCT_BUNDLE_IDENTIFIER = '${BUNDLE_ID}';/' ios/${XCODE_SCHEME}.xcodeproj/project.pbxproj
