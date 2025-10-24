@@ -181,6 +181,7 @@ workflows:
         # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
       vars:
         <<: *env_vars
+        CLIENT_ID: "_"
     scripts:
       - *get_assets #Getting client assets from S3 bucket
 
