@@ -21,8 +21,8 @@ workflows:
   ios-client-release:
     name: iOS client release
     instance_type: mac_mini_m2
-    # labels:
-    #   - ${CLIENT_ID} # Helpful when you open your Codemagic's builds page  
+    labels:
+      - ${CLIENT_ID} # Helpful when you open your Codemagic's builds page  
     environment:
       groups:
         # customer specific groups are set using the API request
@@ -113,7 +113,8 @@ workflows:
         - aws_credentials # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
       vars:
         <<: *env_vars
-        XCODE_SCHEME: "Runner"  
+        XCODE_SCHEME: "Runner" 
+        CLIENT_ID: "_"
     scripts:
       - *get_assets #Getting client assets from S3 bucket
 
